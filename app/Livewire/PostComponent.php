@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Post;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -12,7 +13,7 @@ class PostComponent extends Component
 
     #[Rule('required|min:3')]
     public $body;
-    
+
     public $isOpen = 0;
 
     public function create()
@@ -23,6 +24,20 @@ class PostComponent extends Component
     {
         $this->isOpen = true;
     }
+
+    public function store()
+    {
+        $this->validate();
+        Post::create([
+            'title' => $this->title,
+            'body' => $this->body,
+        ]);
+        session()->flash('success', 'Post created successfully.');
+
+        $this->reset('title','body');
+        $this->closeModal();
+    }
+
     public function closeModal()
     {
         $this->isOpen = false;

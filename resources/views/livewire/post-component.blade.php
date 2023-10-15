@@ -24,11 +24,11 @@
                           <form wire:submit="store">
                               <div class="form-group">
                                   <label for="title">Post Title</label>
-                                  <input type="text" class="form-control" id="title" placeholder="Enter post title">
+                                  <input type="text" class="form-control" wire:model="title" id="title" placeholder="Enter post title">
                               </div>
                               <div class="form-group">
                                   <label for="body">Post Body</label>
-                                  <textarea class="form-control" id="body" rows="4" placeholder="Enter post body"></textarea>
+                                  <textarea class="form-control" wire:model="body" id="body" rows="4" placeholder="Enter post body"></textarea>
                               </div>
                               <button type="submit" class="btn btn-primary mt-4">
                                 Save
