@@ -6,6 +6,11 @@
           </div>
         </nav>
         <div class="container px-4 py-5">
+            @if (session()->has('success'))
+                <div class="alert alert-success mt-4 ml-4 mr-4 col-4" role="alert">
+                    {{session('success')}}
+                </div>
+            @endif
           <button wire:click="create" class="btn btn-primary">Create Post</button>
           @if ($isOpen)
           <div class="modal show" tabindex="-1" role="dialog" style="display: block;" >
@@ -25,10 +30,12 @@
                               <div class="form-group">
                                   <label for="title">Post Title</label>
                                   <input type="text" class="form-control" wire:model="title" id="title" placeholder="Enter post title">
+                                  <span class="text-danger">@error('title') {{ $message }} @enderror</span>
                               </div>
                               <div class="form-group">
                                   <label for="body">Post Body</label>
                                   <textarea class="form-control" wire:model="body" id="body" rows="4" placeholder="Enter post body"></textarea>
+                                  <span class="text-danger">@error('body') {{ $message }} @enderror</span>
                               </div>
                               <button type="submit" class="btn btn-primary mt-4">
                                 Save
