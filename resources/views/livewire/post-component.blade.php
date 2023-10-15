@@ -14,6 +14,7 @@
           <button wire:click="create" class="btn btn-primary">Create Post</button>
           {{--table post--}}
           <table class="table table-dark mt-4">
+
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -46,6 +47,9 @@
                 <p>No post found</p>
             @endforelse
           </table>
+
+            {{ $posts->links() }}
+            
           {{--table post--}}
           @if ($isOpen)
           <div class="modal show" tabindex="-1" role="dialog" style="display: block;" >
