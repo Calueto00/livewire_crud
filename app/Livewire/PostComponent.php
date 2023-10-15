@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Post;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PostComponent extends Component
 {
+    use WithPagination;
+
     #[Rule('required|min:3')]
     public $title;
 
@@ -47,7 +50,7 @@ class PostComponent extends Component
     public function render()
     {
         return view('livewire.post-component',[
-            'posts' => Post::all()
+            'posts' => Post::paginate(5)
         ]);
     }
 }
