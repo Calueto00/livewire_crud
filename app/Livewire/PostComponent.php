@@ -23,6 +23,7 @@ class PostComponent extends Component
     public function openModal()
     {
         $this->isOpen = true;
+        $this->resetValidation();
     }
 
     public function store()
@@ -45,6 +46,8 @@ class PostComponent extends Component
 
     public function render()
     {
-        return view('livewire.post-component');
+        return view('livewire.post-component',[
+            'posts' => Post::all()
+        ]);
     }
 }
