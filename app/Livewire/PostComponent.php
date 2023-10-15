@@ -19,8 +19,11 @@ class PostComponent extends Component
 
     public $isOpen = 0;
 
+    public $postId;
+
     public function create()
     {
+        $this->reset('title','body','postId');
         $this->openModal();
     }
     public function openModal()
@@ -40,6 +43,30 @@ class PostComponent extends Component
 
         $this->reset('title','body');
         $this->closeModal();
+    }
+
+    public function edit($id)
+    {
+        $post = Post::findOrFail($id);
+        $this->postId = $id;
+        $this->title = $post->title;
+        $this->body = $post->body;
+
+        $this->openModal();
+    }
+
+    public function update()
+    {
+        if ($this->postId) {
+            $post = Post::findOrFail($this->postId);
+            $post->update([
+                'title' => $this->title,
+                'body' => $this->body,
+            ]);
+            session()->flash('success', 'Post updated successfully.');
+            $this->closeModal();
+            $this->reset('title', 'body', 'postId');
+        }
     }
 
     public function closeModal()
